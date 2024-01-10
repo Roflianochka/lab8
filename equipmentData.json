@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Desktop Computer",
+    "category": "IT Equipment",
+    "acquisition_date": "2022-01-01",
+    "current_condition": "Good",
+    "location": "Enterprise 1"
+  },
+  {
+    "id": 2,
+    "name": "Laptop",
+    "category": "IT Equipment",
+    "acquisition_date": "2022-02-15",
+    "current_condition": "Excellent",
+    "location": "Enterprise 1"
+  },
+  {
+    "id": 3,
+    "name": "Forklift",
+    "category": "Industrial Equipment",
+    "acquisition_date": "2021-11-10",
+    "current_condition": "Fair",
+    "location": "Enterprise 2"
+  },
+  {
+    "id": 4,
+    "name": "Conference Room Projector",
+    "category": "Audio-Visual Equipment",
+    "acquisition_date": "2023-03-20",
+    "current_condition": "Operational",
+    "location": "Enterprise 1"
+  },
+  {
+    "id": 5,
+    "name": "Production Machine",
+    "category": "Manufacturing Equipment",
+    "acquisition_date": "2021-09-05",
+    "current_condition": "Needs Maintenance",
+    "location": "Enterprise 2"
+  },
+  {
+    "id": 2,
+    "name": "Generator",
+    "category": "Power Equipment",
+    "acquisition_date": "2022-06-25",
+    "current_condition": "Functional",
+    "location": "Enterprise 2"
+  },
+  {
+    "id": 6,
+    "name": "New Equipment",
+    "category": "Miscellaneous",
+    "acquisition_date": "2024-01-09",
+    "current_condition": "New",
+    "location": "Enterprise 1"
+  }
+]

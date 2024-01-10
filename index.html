@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Состояние обрудования</title>
+  </head>
+  <body>
+    <h1>Состояние обрудования</h1>
+
+    <button onclick="fetchData()">Получить данные</button>
+    <button onclick="fetchDataPost()">Получить данные с помощью POST</button>
+
+    <h2>Список оборудования</h2>
+    <ul id="equipmentList"></ul>
+
+    <button onclick="postData()">Добавить новое оборудование</button>
+    <h2>Скачать данные</h2>
+    <button onclick="downloadData('json')">Скачать JSON</button>
+    <button onclick="downloadData('xml')">Скачать XML</button>
+    <button onclick="downloadData('html')">Скачать HTML</button>
+    <script>
+      async function fetchData() {
+        const response = await fetch("http://localhost:3000/api/equipment");
+        const data = await response.json();
+
+        const equipmentList = document.getElementById("equipmentList");
+        equipmentList.innerHTML = "";
+
+        data.forEach((equipment) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${equipment.name} - ${equipment.current_condition}`;
+          equipmentList.appendChild(listItem);
+        });
+      }
+
+      async function fetchDataPost() {
+        const response = await fetch("http://localhost:3000/api/equipment", {
+          method: "POST",
+        });
+        const data = await response.json();
+
+        const equipmentList = document.getElementById("equipmentList");
+        equipmentList.innerHTML = "";
+
+        data.forEach((equipment) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${equipment.name} - ${equipment.current_condition}`;
+          equipmentList.appendChild(listItem);
+        });
+      }
+
+      async function postData() {
+        const response = await fetch("/api/equipment/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: 6,
+            name: "Новое оборудование",
+            category: "Новое",
+            acquisition_date: "2024-01-09",
+            current_condition: "Новое",
+            location: "Предприятие 1",
+          }),
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        fetchData();
+      }
+
+      async function downloadData(format) {
+        const response = await fetch(
+          `http://localhost:3000/api/formattedData`,
+          {
+            headers: {
+              Accept: `application/${format}`,
+            },
+          }
+        );
+
+        if (format === "json") {
+          const data = await response.json();
+          downloadFile(data, format);
+        } else if (format === "xml") {
+          const data = await response.text();
+          downloadFile(data, format);
+        } else if (format === "html") {
+          const data = await response.text();
+          downloadFile(data, format);
+        } else {
+          console.error("Invalid format for download.");
+        }
+      }
+
+      function downloadFile(data, format) {
+        const blob = new Blob([data], { type: `application/${format}` });
+        const link = document.createElement("a");
+
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `equipmentData.${format}`;
+        link.click();
+      }
+    </script>
+  </body>
+</html>
